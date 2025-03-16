@@ -2,7 +2,7 @@ name: HeliumOS Canary Release
 on:
   push:
     branches:
-      - test
+      - dev
 
 jobs:
   build_and_push:

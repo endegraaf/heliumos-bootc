@@ -8,8 +8,7 @@ dnf install -y \
     angelfish \
     kolourpaint \
     kcalc \
-    okular \
-    krita
+    okular
 
 
 dnf install -y \

@@ -32,11 +32,9 @@ jobs:
           VARIANT: edge
         run: |
 
-          export CONTAINERFILE=10/Containerfile.edge
-
           podman build \
             -t $REGISTRY_IMAGE \
-            -f $CONTAINERFILE . \
+            -f 10/Containerfile.edge . \
             --label "containers.bootc=1" \
             --label "io.artifacthub.package.readme-url=https://codeberg.org/HeliumOS/bootc/raw/branch/release/README.md" \
             --label "org.opencontainers.image.created=$(date --rfc-3339=seconds)" \

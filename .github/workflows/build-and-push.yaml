@@ -32,7 +32,7 @@ jobs:
           VARIANT: edge
         run: |
 
-          export CONTAINERFILE=$VERSION/Containerfile.edge
+          export CONTAINERFILE=10/Containerfile.edge
 
           podman build \
             -t $REGISTRY_IMAGE \
@@ -64,13 +64,13 @@ jobs:
           # VARIANT: ${{ matrix.variant }}
         run: |
           if [[ $IS_CANARY = true ]]; then
-            export VERSION=$VERSION-canary
+            export VERSION=10-canary
           fi
 
           if [[ $VARIANT == "" ]]; then
-            export TAG=$VERSION
+            export TAG=10
           else
-            export TAG=$VERSION-$VARIANT
+            export TAG=10-edge
           fi
 
           podman push $REGISTRY_IMAGE docker://$REGISTRY/$REGISTRY_IMAGE:$TAG

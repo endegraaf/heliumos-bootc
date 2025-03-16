@@ -53,12 +53,7 @@ jobs:
           podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY/$REGISTRY_IMAGE
 
       - name: Push to registry
-        env:
-          IS_CANARY: ${{ inputs.is_canary }}
-          REGISTRY_IMAGE: ${{ vars.registry_image }}
-          REGISTRY: ${{ vars.registry }}
-          # VERSION: ${{ matrix.version }}
-          # VARIANT: ${{ matrix.variant }}
+
         run: |
 
           podman push $REGISTRY_IMAGE docker://$REGISTRY/$REGISTRY_IMAGE:10-edge

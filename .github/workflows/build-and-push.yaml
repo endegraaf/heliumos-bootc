@@ -15,7 +15,7 @@ env:
   REGISTRY_IMAGE: heliumos-bootc
   REGISTRY_USER: endegraaf
   REGISTRY_PASS: ${{ secrets.registry_pass }}
-  REGISTRY: ghcr.io/endegraaf/
+  REGISTRY: ghcr.io/endegraaf
 
 jobs:
    build_and_push:
@@ -50,7 +50,7 @@ jobs:
       - name: Login to registry
 
         run: |
-          podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY
+          podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY/$REGISTRY_IMAGE
 
       - name: Push to registry
         env:

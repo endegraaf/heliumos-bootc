@@ -11,10 +11,10 @@ on:
 jobs:
    build_and_push:
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        version: [10]
-        variant: ["",edge]
+    # strategy:
+    #   matrix:
+    #     version: [10]
+    #     variant: ["",edge]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,14 +28,12 @@ jobs:
       - name: Build image
         env:
           REGISTRY_IMAGE: ${{ vars.registry_image }}
-          VERSION: ${{ matrix.version }}
+          VERSION: 10
           VARIANT: edge
         run: |
-          if [[ $VARIANT == "" ]]; then
-            export CONTAINERFILE=$VERSION/Containerfile
-          else
-            export CONTAINERFILE=$VERSION/Containerfile.$VARIANT
-          fi
+
+          export CONTAINERFILE=$VERSION/Containerfile.$VARIANT
+
           podman build \
             -t $REGISTRY_IMAGE \
             -f $CONTAINERFILE . \

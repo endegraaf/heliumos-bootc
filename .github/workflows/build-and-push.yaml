@@ -8,13 +8,19 @@ on:
         required: true
         type: boolean
 
+
+env:
+  VERSION: 10
+  VARIANT: edge
+  REGISTRY_IMAGE: heliumos-bootc
+  REGISTRY_USER: endegraaf
+  REGISTRY_PASS: ${{ secrets.registry_pass }}
+  REGISTRY: ghcr.io/endegraaf/
+
 jobs:
    build_and_push:
     runs-on: ubuntu-24.04
-    # strategy:
-    #   matrix:
-    #     version: [10]
-    #     variant: ["",edge]
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,10 +32,7 @@ jobs:
             podman
 
       - name: Build image
-        env:
-          REGISTRY_IMAGE: ${{ vars.registry_image }}
-          VERSION: 10
-          VARIANT: edge
+
         run: |
 
           podman build \
@@ -45,11 +48,7 @@ jobs:
             --label "io.artifacthub.package.logo-url=https://codeberg.org/HeliumOS/logo/src/commit/0ce8b5cd8f6d311924d84c9a9f4961da95306171/export/logo/logo-color-256x256.png"
             
       - name: Login to registry
-        env:
-          REGISTRY_IMAGE: ${{ vars.registry_image }}
-          REGISTRY_USER: ${{ secrets.registry_user }}
-          REGISTRY_PASS: ${{ secrets.registry_pass }}
-          REGISTRY: ${{ vars.registry }}
+
         run: |
           podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY
 
